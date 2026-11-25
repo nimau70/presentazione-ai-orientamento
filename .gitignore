@@ -1,0 +1,5 @@
+fetch*.log
+server.log
+nohup.out
+__pycache__/
+.DS_Store

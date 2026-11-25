@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligenza Artificiale — Giornata di Orientamento · ITS-ICT Academy Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .pcard .init { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-d); font-weight: 700; font-size: 44px; color: var(--cyan);
+    background: linear-gradient(160deg, #101a30, #0a0f1c); }
+  /* quiz slide 13 */
+  .people.quiz .who { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  .people.quiz.revealed .who { opacity: 1; transform: none; }
+  .people.quiz.revealed .pcard:nth-child(1) .who { transition-delay: .05s; }
+  .people.quiz.revealed .pcard:nth-child(2) .who { transition-delay: .15s; }
+  .people.quiz.revealed .pcard:nth-child(3) .who { transition-delay: .25s; }
+  .people.quiz.revealed .pcard:nth-child(4) .who { transition-delay: .35s; }
+  .people.quiz.revealed .pcard:nth-child(5) .who { transition-delay: .45s; }
+  .people.quiz.revealed .pcard:nth-child(6) .who { transition-delay: .55s; }
+  .people.quiz.revealed .pcard:nth-child(7) .who { transition-delay: .65s; }
+  .people.quiz.revealed .pcard:nth-child(8) .who { transition-delay: .75s; }
+  .people.quiz.revealed .pcard:nth-child(9) .who { transition-delay: .85s; }
+  .people.quiz.revealed .pcard:nth-child(10) .who { transition-delay: .95s; }
+  /* risk cards with images */
+  .risk { padding: 0; overflow: hidden; }
+  .risk img { width: 100%; height: 96px; object-fit: cover; display: block; opacity: .85; }
+  .risk .body { padding: clamp(12px, 1.6vw, 20px); }
+  /* energy bars */
+  .ebar-row { display: flex; align-items: center; gap: 10px; margin: 7px 0; }
+  .ebar-row .lbl { width: 130px; color: var(--dim); font-size: 13px; text-align: right; flex: 0 0 130px; }
+  .ebar-row .tr { flex: 1; height: 16px; background: rgba(148,178,255,.08); border-radius: 8px; overflow: hidden; }
+  .ebar-row .tr i { display: block; height: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--cyan), var(--violet)); }
+  .ebar-row .val { width: 64px; font-family: var(--font-d); font-weight: 700; color: var(--ink); font-size: 14px; }
+  .mixbar { display: flex; height: 22px; border-radius: 11px; overflow: hidden; margin: 8px 0 4px; border: 1px solid var(--line); }
+  .mixbar i { display: block; height: 100%; }
+  .mixlegend { display: flex; flex-wrap: wrap; gap: 10px; color: var(--dim); font-size: 12px; }
+  .mixlegend b { color: var(--ink); }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; }
+  /* agenda clickable */
+  .ag { cursor: pointer; }
+  .ag .go { margin-top: auto; color: var(--cyan); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; opacity: .75; }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <!-- 1 · TITOLO -->
+  <section class="slide center" data-note="Benvenuti. Oggi entriamo dentro l'intelligenza artificiale: cosa fa, chi la fa, dove gira fisicamente e come potete entrarci voi. La presentazione finisce con il nostro corso ITS gratuito a Roma.">
+    <div class="bg-grid"></div>
+    <div class="bg-glow" style="background:var(--cyan); top:-20vmax; left:-10vmax;"></div>
+    <div class="bg-glow" style="background:var(--violet); bottom:-25vmax; right:-12vmax;"></div>
+    <div class="mapwrap" data-mode="hubs" style="position:absolute; inset:auto 0 0 0; opacity:.5; max-height:46vh;"></div>
+    <div style="position:relative; z-index:2;" class="col center">
+      <div class="kicker" style="justify-content:center;">Giornata di orientamento · ITS-ICT Academy Roma</div>
+      <h1 class="mega">INTELLIGENZA<br>ARTIFICIALE</h1>
+      <p class="sub" style="text-align:center;">Dentro la macchina che sta cambiando il mondo — video, persone, datacenter, chip e cavi.</p>
+      <div class="row" style="justify-content:center; margin-top:10px;">
+        <span class="tag c">ITS-ICT Academy · Roma</span>
+        <span class="tag">Corso “AI &amp; Digital Innovation Specialist”</span>
+        <span class="tag v">2 anni · gratuito</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · AGENDA (cliccabile) -->
+  <section class="slide" data-note="Cinque tappe. I box sono cliccabili: portano direttamente alla sezione relativa.">
+    <div class="bg-grid"></div>
+    <div class="kicker">Il percorso</div>
+    <h2 class="big" style="margin:14px 0 6px;">Cinque tappe</h2>
+    <p class="sub" style="margin-bottom:18px;">Clicca un riquadro per saltare alla sezione 👉</p>
+    <div class="agenda">
+      <div class="ag" data-goto="4"><div class="n">01</div><div class="t">Cosa fa oggi</div><div class="d">Video, voce, musica generati dall’AI — i prodotti di frontiera di novembre 2026</div><div class="go">vai →</div></div>
+      <div class="ag" data-goto="13"><div class="n">02</div><div class="t">Chi c’è dietro</div><div class="d">Quiz: riconosci le persone? Poi aziende, paesi e a cosa puntano</div><div class="go">vai →</div></div>
+      <div class="ag" data-goto="14"><div class="n">03</div><div class="t">Dove gira</div><div class="d">La mappa mondiale dei datacenter e della potenza di calcolo</div><div class="go">vai →</div></div>
+      <div class="ag" data-goto="16"><div class="n">04</div><div class="t">Come è fatta</div><div class="d">Chip, filiera globale, cavi sottomarini, energia</div><div class="go">vai →</div></div>
+      <div class="ag" data-goto="21"><div class="n">05</div><div class="t">E noi?</div><div class="d">Il corso ITS-ICT Academy “AI &amp; Digital Innovation” a Roma</div><div class="go">vai →</div></div>
+    </div>
+  </section>
+
+  <!-- 3 · LA BASE -->
+  <section class="slide" data-note="In tre parole: l'AI impara dagli esempi (dati), trova gli schemi nascosti e prevede il resto. Esempio reale di 'prossimo token': 'La capitale d'Italia è…' → l'AI pesa le probabilità e sceglie 'Roma'. Non pensa: completa lo schema più probabile. I modelli di frontiera hanno milliards di parametri addestrati su testo, immagini, video, codice.">
+    <div class="bg-grid"></div>
+    <div class="kicker">La base</div>
+    <div class="split" style="margin-top:10px;">
+      <div class="col">
+        <div class="word">DATI</div>
+        <div class="word" style="color:var(--cyan);">↓ SCHEMI</div>
+        <div class="word" style="color:var(--violet);">↓ PREDIZIONI</div>
+        <p class="sub">L’AI impara dagli esempi, trova gli <b style="color:var(--ink);">schemi nascosti</b> nei dati e <b style="color:var(--ink);">prevede il resto</b>. Ogni parola che genera è la più probabile: il “prossimo token”.</p>
+        <div class="panel" style="padding:14px 18px;">
+          <div style="font-family:var(--font-d); font-size:15px; color:var(--dim);">ESEMPIO REALE</div>
+          <div style="font-family:var(--font-d); font-size:clamp(16px,1.8vw,24px); margin:6px 0;">“La capitale d’Italia è…”</div>
+          <div class="ebar-row"><span class="lbl" style="width:90px;flex-basis:90px;">Roma</span><span class="tr"><i style="width:91%; background:linear-gradient(90deg,#22d3ee,#34d399);"></i></span><span class="val">91%</span></div>
+          <div class="ebar-row"><span class="lbl" style="width:90px;flex-basis:90px;">Milano</span><span class="tr"><i style="width:4%;"></i></span><span class="val">4%</span></div>
+          <div class="ebar-row"><span class="lbl" style="width:90px;flex-basis:90px;">Napoli</span><span class="tr"><i style="width:3%;"></i></span><span class="val">3%</span></div>
+        </div>
+      </div>
+      <div class="panel" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;">
+        <svg viewBox="0 0 340 240" style="width:min(100%,460px);">
+          <g stroke="rgba(34,211,238,.35)" stroke-width="1">
+            <line x1="45" y1="30" x2="170" y2="55"/><line x1="45" y1="30" x2="170" y2="105"/><line x1="45" y1="30" x2="170" y2="155"/><line x1="45" y1="30" x2="170" y2="205"/>
+            <line x1="45" y1="80" x2="170" y2="55"/><line x1="45" y1="80" x2="170" y2="105"/><line x1="45" y1="80" x2="170" y2="155"/><line x1="45" y1="80" x2="170" y2="205"/>
+            <line x1="45" y1="130" x2="170" y2="55"/><line x1="45" y1="130" x2="170" y2="105"/><line x1="45" y1="130" x2="170" y2="155"/><line x1="45" y1="130" x2="170" y2="205"/>
+            <line x1="45" y1="180" x2="170" y2="55"/><line x1="45" y1="180" x2="170" y2="105"/><line x1="45" y1="180" x2="170" y2="155"/><line x1="45" y1="180" x2="170" y2="205"/>
+            <line x1="45" y1="225" x2="170" y2="55"/><line x1="45" y1="225" x2="170" y2="105"/><line x1="45" y1="225" x2="170" y2="155"/><line x1="45" y1="225" x2="170" y2="205"/>
+            <line x1="170" y1="55" x2="295" y2="120"/><line x1="170" y1="105" x2="295" y2="120"/><line x1="170" y1="155" x2="295" y2="120"/><line x1="170" y1="205" x2="295" y2="120"/>
+          </g>
+          <g fill="#22d3ee"><circle cx="45" cy="30" r="8"/><circle cx="45" cy="80" r="8"/><circle cx="45" cy="130" r="8"/><circle cx="45" cy="180" r="8"/><circle cx="45" cy="225" r="8"/></g>
+          <g fill="#a78bfa"><circle cx="170" cy="55" r="8"/><circle cx="170" cy="105" r="8"/><circle cx="170" cy="155" r="8"/><circle cx="170" cy="205" r="8"/></g>
+          <circle cx="295" cy="120" r="11" fill="#fbbf24"/>
+          <text x="45" y="250" fill="#8b98b8" font-size="12" text-anchor="middle" font-family="Space Grotesk">esempi (dati)</text>
+          <text x="170" y="250" fill="#8b98b8" font-size="12" text-anchor="middle" font-family="Space Grotesk">rete: miliardi di connessioni</text>
+          <text x="295" y="145" fill="#fbbf24" font-size="12" text-anchor="middle" font-family="Space Grotesk">prossima parola</text>
+        </svg>
+        <div class="tag c">addestramento =pesare miliardi di connessioni sugli esempi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · VIDEO GPT-6.2 ASTRA (OpenAI) -->
+  <section class="slide vslide" data-note="GPT-6.2 Astra, il modello di punta di OpenAI (17 nov 2026): ragionamento, agenti, lavoro reale. Segmento di ~15s in loop (regolabile con data-start/data-end).">
+    <div class="stage"><div class="yt" data-id="C1zYX5jwqq4" data-start="24" data-end="39"><div class="thumb"><img src="assets/img/thumbs/astra.jpg" alt="GPT-6.2 Astra"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Modello di punta · OpenAI · nov 2026</div><div class="vtitle">GPT-6.2 Astra</div><div class="vkw">ragionamento · agenti · lavoro reale</div></div>
+    <div class="vfoot"><span class="tag c">LLM frontier</span><span class="src">YouTube · OpenAI</span></div>
+  </section>
+
+  <!-- 5 · VIDEO CLAUDE FABLE 5.2 (Anthropic) -->
+  <section class="slide vslide" data-note="Claude Fable 5.2 di Anthropic (9 nov 2026): il riferimento per codice, documenti lunghi e agenti. Con Mythos 5.2 è il duello di novembre 2026 contro GPT-6.2 Astra.">
+    <div class="stage"><div class="yt" data-id="6a1QSJlsYpU" data-start="18" data-end="33"><div class="thumb"><img src="assets/img/thumbs/fable.jpg" alt="Claude Fable 5.2"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Modello di punta · Anthropic · nov 2026</div><div class="vtitle">Claude Fable 5.2</div><div class="vkw">codice · documenti · agenti</div></div>
+    <div class="vfoot"><span class="tag c">LLM frontier</span><span class="src">YouTube · Claude</span></div>
+  </section>
+
+  <!-- 6 · VIDEO VEO 3.1 (Google Flow) -->
+  <section class="slide vslide" data-note="Veo 3.1 dentro Google Flow: il top per i video nel 2026, con controllo registico (camera, luci, dialoghi).">
+    <div class="stage"><div class="yt" data-id="B78BJuPxmBU" data-start="22" data-end="37"><div class="thumb"><img src="assets/img/thumbs/veo31.jpg" alt="Veo 3.1"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Video · Google Flow · 2026</div><div class="vtitle">Veo 3.1</div><div class="vkw">testo → video con controllo registico</div></div>
+    <div class="vfoot"><span class="tag v">video AI</span><span class="src">YouTube · Google DeepMind</span></div>
+  </section>
+
+  <!-- 7 · VIDEO RUNWAY GEN-4.5 -->
+  <section class="slide vslide" data-note="Runway Gen-4.5: controllo editoriale frame-by-frame, leader per il cinema e la produzione video.">
+    <div class="stage"><div class="yt" data-id="ei2PsDpPbB4" data-start="12" data-end="27"><div class="thumb"><img src="assets/img/thumbs/gen45.jpg" alt="Runway Gen-4.5"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Video · Runway · 2026</div><div class="vtitle">Gen-4.5</div><div class="vkw">video cinema · controllo frame</div></div>
+    <div class="vfoot"><span class="tag v">video AI</span><span class="src">YouTube · Runway</span></div>
+  </section>
+
+  <!-- 8 · VIDEO KLING 4.0 -->
+  <section class="slide vslide" data-note="Kling 4.0 di Kuaishou (Cina): fotorealismo e 'one prompt one film'. Ottimo rapporto qualità/prezzo.">
+    <div class="stage"><div class="yt" data-id="nlM7kL3kv_Y" data-start="10" data-end="25"><div class="thumb"><img src="assets/img/thumbs/kling4.jpg" alt="Kling 4.0"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Video · Kling (Cina) · 2026</div><div class="vtitle">Kling 4.0</div><div class="vkw">testo → film fotorealistico</div></div>
+    <div class="vfoot"><span class="tag v">video AI</span><span class="src">YouTube · Kling AI</span></div>
+  </section>
+
+  <!-- 9 · VIDEO HIGGSFIELD -->
+  <section class="slide vslide" data-note="Higgsfield: lo strumento di chi crea video e ads in pochi minuti da un prompt. Nel 2026 ha anche un festival del cinema AI (Higgsfield Film Festival).">
+    <div class="stage"><div class="yt" data-id="qsgDMygRTto" data-start="35" data-end="50"><div class="thumb"><img src="assets/img/thumbs/higgsfield.jpg" alt="Higgsfield"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Video · Higgsfield · 2026</div><div class="vtitle">Higgsfield</div><div class="vkw">prompt → video professionale</div></div>
+    <div class="vfoot"><span class="tag a">creator & ads</span><span class="src">YouTube · Higgsfield</span></div>
+  </section>
+
+  <!-- 10 · VIDEO ELEVEN V4 -->
+  <section class="slide vslide" data-note="ElevenLabs v4 (2026): voce con emozioni naturali, pensata per audiolibri, doppiaggio, videogiochi e assistenti.">
+    <div class="stage"><div class="yt" data-id="th_tXR2QQ6U" data-start="12" data-end="27"><div class="thumb"><img src="assets/img/thumbs/elevenv4.jpg" alt="Eleven v4"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Voce · ElevenLabs · 2026</div><div class="vtitle">Eleven v4</div><div class="vkw">testo → voce con emozioni</div></div>
+    <div class="vfoot"><span class="tag a">audio AI</span><span class="src">YouTube · ElevenLabs</span></div>
+  </section>
+
+  <!-- 11 · VIDEO SUNO V6 -->
+  <section class="slide vslide" data-note="Suno v6 (2026): da un testo a una canzone completa con voce e strumenti. Questioni aperte su copyright e training data.">
+    <div class="stage"><div class="yt" data-id="_lHvWn2SNC4" data-start="15" data-end="30"><div class="thumb"><img src="assets/img/thumbs/sunov6.jpg" alt="Suno v6"><div class="play"><span>▶</span></div></div></div></div>
+    <div class="veil"></div>
+    <div class="vhead"><div class="kicker">Musica · Suno · 2026</div><div class="vtitle">Suno v6</div><div class="vkw">testo → canzone completa</div></div>
+    <div class="vfoot"><span class="tag a">audio AI</span><span class="src">YouTube · Suno</span></div>
+  </section>
+
+  <!-- 12 · CHI FA COSA (matrix 2026) -->
+  <section class="slide" data-note="Non esiste 'l'AI': esistono tanti strumenti per cose diverse, aggiornati a novembre 2026. Chat: ChatGPT (Astra), Claude (Fable 5.2), Gemini, Grok, Le Chat, DeepSeek. Video: Veo 3.1, Runway, Kling, Higgsfield. Sinistra: creare contenuti. Destra: costruire prodotti.">
+    <div class="bg-grid"></div>
+    <div class="kicker">L’ecosistema · nov 2026</div>
+    <h2 class="big" style="margin:12px 0 20px;">Chi fa cosa</h2>
+    <div class="matrix">
+      <div class="mcol">
+        <h3 class="c">Crea contenuti</h3>
+        <div class="tool"><span class="lg"><img data-init="V" src="assets/img/logos/gemini.png" alt=""></span><span class="tn">Veo 3.1 · Google Flow</span><span class="tk">video</span></div>
+        <div class="tool"><span class="lg"><img data-init="R" src="assets/img/logos/runway.svg" alt=""></span><span class="tn">Runway Gen-4.5</span><span class="tk">video cinema</span></div>
+        <div class="tool"><span class="lg"><img data-init="K" src="assets/img/logos/kling.svg" alt=""></span><span class="tn">Kling 4.0</span><span class="tk">video (Cina)</span></div>
+        <div class="tool"><span class="lg"><img data-init="H" src="assets/img/logos/higgsfield.svg" alt=""></span><span class="tn">Higgsfield</span><span class="tk">video ads</span></div>
+        <div class="tool"><span class="lg"><img data-init="E" src="assets/img/logos/elevenlabs.png" alt=""></span><span class="tn">ElevenLabs v4</span><span class="tk">voce</span></div>
+        <div class="tool"><span class="lg"><img data-init="S" src="assets/img/logos/suno.svg" alt=""></span><span class="tn">Suno v6</span><span class="tk">musica</span></div>
+        <div class="tool"><span class="lg"><img data-init="NB" src="assets/img/logos/gemini.png" alt=""></span><span class="tn">Nano Banana 2</span><span class="tk">immagini (Google)</span></div>
+        <div class="tool"><span class="lg"><img data-init="M" src="assets/img/logos/midjourney.svg" alt=""></span><span class="tn">Midjourney</span><span class="tk">immagini</span></div>
+      </div>
+      <div class="mcol">
+        <h3 class="v">Costruisce prodotti</h3>
+        <div class="tool"><span class="lg"><img data-init="GPT" src="assets/img/logos/openai.png" alt=""></span><span class="tn">ChatGPT · GPT-6.2 Astra</span><span class="tk">chat & agenti</span></div>
+        <div class="tool"><span class="lg"><img data-init="C" src="assets/img/logos/anthropic.svg" alt=""></span><span class="tn">Claude · Fable 5.2</span><span class="tk">codice & documenti</span></div>
+        <div class="tool"><span class="lg"><img data-init="G" src="assets/img/logos/google.png" alt=""></span><span class="tn">Gemini 4</span><span class="tk">multimodale</span></div>
+        <div class="tool"><span class="lg"><img data-init="X" src="assets/img/logos/x.png" alt=""></span><span class="tn">Grok · xAI</span><span class="tk">chat</span></div>
+        <div class="tool"><span class="lg"><img data-init="L" src="assets/img/logos/mistral.png" alt=""></span><span class="tn">Le Chat · Mistral 🇪🇺</span><span class="tk">AI europea</span></div>
+        <div class="tool"><span class="lg"><img data-init="P" src="assets/img/logos/perplexity.svg" alt=""></span><span class="tn">Perplexity</span><span class="tk">ricerca</span></div>
+        <div class="tool"><span class="lg"><img data-init="GH" src="assets/img/logos/github.png" alt=""></span><span class="tn">Copilot · Claude Code</span><span class="tk">programmazione</span></div>
+        <div class="tool"><span class="lg"><img data-init="PT" src="assets/img/logos/pytorch.svg" alt=""></span><span class="tn">Python + PyTorch · Colab · HF</span><span class="tk">machine learning</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · CHI C'È DIETRO — QUIZ + click rivela -->
+  <section class="slide" id="quizslide" data-note="QUIZ: mostra solo le facce e chiedi 'chi è? che azienda?'. Poi clicca: compaiono nomi e aziende in sequenza. Quasi tutto il compute e i modelli di frontiera nascono negli USA; in Europa c'è Mistral (Parigi).">
+    <div class="bg-grid"></div>
+    <div class="kicker">Le persone</div>
+    <div class="row" style="margin:10px 0 16px; justify-content:space-between;">
+      <h2 class="big">Chi c’è dietro?</h2>
+      <span class="tag a">👆 clicca sulla slide per rivelare nomi e aziende</span>
+    </div>
+    <div class="people quiz" id="peopleGrid">
+      <div class="pcard"><img data-init="EM" src="assets/img/people/musk.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Elon Musk</div><div class="co">xAI · X · Tesla</div><div class="kw">Grok, robotaxi, chip</div></div></div>
+      <div class="pcard"><img data-init="JH" src="assets/img/people/huang.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Jensen Huang</div><div class="co">NVIDIA</div><div class="kw">i chip che fanno girare l’AI (~80% del mercato)</div></div></div>
+      <div class="pcard"><img data-init="SA" src="assets/img/people/altman.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Sam Altman</div><div class="co">OpenAI</div><div class="kw">GPT-6.2 Astra · Sora (chiuso 2026)</div></div></div>
+      <div class="pcard"><img data-init="DA" src="assets/img/people/amodei.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Dario Amodei</div><div class="co">Anthropic</div><div class="kw">Claude Fable 5.2 · Mythos</div></div></div>
+      <div class="pcard"><img data-init="DH" src="assets/img/people/hassabis.jpg" alt=""><span class="flag">🇬🇧</span><div class="grad"></div><div class="who"><div class="nm">Demis Hassabis</div><div class="co">Google DeepMind</div><div class="kw">Gemini · Veo 3.1 · Nobel ’24</div></div></div>
+      <div class="pcard"><img data-init="SP" src="assets/img/people/pichai.jpg" alt=""><span class="flag">🇺🇸🇮🇳</span><div class="grad"></div><div class="who"><div class="nm">Sundar Pichai</div><div class="co">Google</div><div class="kw">Gemini dentro Android & Search</div></div></div>
+      <div class="pcard"><img data-init="JB" src="assets/img/people/bezos.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Jeff Bezos</div><div class="co">Amazon · AWS</div><div class="kw">il cloud su cui gira gran parte dell’AI</div></div></div>
+      <div class="pcard"><img data-init="MZ" src="assets/img/people/zuckerberg.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Mark Zuckerberg</div><div class="co">Meta</div><div class="kw">Llama open-source</div></div></div>
+      <div class="pcard"><img data-init="AM" src="assets/img/people/mensch.jpg" alt=""><span class="flag">🇫🇷</span><div class="grad"></div><div class="who"><div class="nm">Arthur Mensch</div><div class="co">Mistral AI</div><div class="kw">l’AI europea (Parigi)</div></div></div>
+      <div class="pcard"><img data-init="LS" src="assets/img/people/su.jpg" alt=""><span class="flag">🇺🇸</span><div class="grad"></div><div class="who"><div class="nm">Lisa Su</div><div class="co">AMD</div><div class="kw">la rivale di NVIDIA sui chip (MI300/MI450)</div></div></div>
+    </div>
+  </section>
+
+  <!-- 14 · MAPPA DATACENTER + NUMERI -->
+  <section class="slide" data-note="Ogni punto è un polo di datacenter, grandezza proporzionale alla potenza (GW). Numeri 2026: ~12.000 datacenter nel mondo, USA 5.427 (45%), Europa 3.346, Germania 529 e UK 523 prime in Europa, Cina ~600, Italia >100. Sul compute AI di frontiera gli USA valgono ~75% (Epoch AI/MUFG 2026).">
+    <div class="bg-grid"></div>
+    <div class="kicker">Dove gira · i numeri 2026</div>
+    <div class="row" style="margin:10px 0 4px; align-items:stretch;">
+      <div class="fact" style="flex:1;"><div class="n">~12.000</div><div class="l">datacenter nel mondo</div></div>
+      <div class="fact" style="flex:1;"><div class="n">5.427</div><div class="l">🇺🇸 USA = 45% del totale</div></div>
+      <div class="fact" style="flex:1;"><div class="n">3.346</div><div class="l">🇪🇺 Europa (DE 529 · UK 523)</div></div>
+      <div class="fact" style="flex:1;"><div class="n">~600</div><div class="l">🇨🇳 Cina · 🇮🇹 Italia &gt;100</div></div>
+      <div class="fact" style="flex:1;"><div class="n" style="color:var(--violet); text-shadow:0 0 30px rgba(167,139,250,.5);">~75%</div><div class="l">del compute AI di frontiera è USA</div></div>
+    </div>
+    <div class="mapwrap" data-mode="hubs" style="margin-top:6px;"></div>
+    <div class="row" style="margin-top:8px;">
+      <span class="tag c">Hub n.1: Northern Virginia</span>
+      <span class="tag">🇨🇳 Cina: secondo polo (~25% elettricità DC)</span>
+      <span class="tag v">🇪🇺 Europa: Dublino · Francoforte · Amsterdam · Londra · Milano</span>
+    </div>
+  </section>
+
+  <!-- 15 · DENTRO UN DATACENTER -->
+  <section class="slide" data-note="Dentro un datacenter: file di server, GPU NVIDIA (H100/Blackwell B200), wafer di silicio, raffreddamento a liquido, alimentazione ridondata. Poche migliaia di tecnici qui dentro gestiscono servizi usati da miliardi di utenti.">
+    <div class="bg-grid"></div>
+    <div class="kicker">Dove gira · dentro</div>
+    <div class="split" style="margin-top:8px;">
+      <div class="imgframe" style="height:min(62vh,640px);"><img src="assets/img/photos/datacenter.jpg" alt="Datacenter"><span class="cap">datacenter · sala server</span></div>
+      <div class="col">
+        <h2 class="big">Una “fabbrica”<br>di calcoli</h2>
+        <div class="row">
+          <span class="tag c">GPU NVIDIA dentro (H100 / Blackwell)</span>
+          <span class="tag">raffreddamento a liquido</span>
+          <span class="tag v">alimentazione ridondata</span>
+          <span class="tag a">pochi tecnici → miliardi di utenti</span>
+        </div>
+        <div class="row" style="margin-top:6px;">
+          <div class="imgframe" style="width:32%; aspect-ratio:1;"><img src="assets/img/photos/nvidia_gpu.jpg" alt="GPU NVIDIA"><span class="cap">GPU NVIDIA</span></div>
+          <div class="imgframe" style="width:32%; aspect-ratio:1;"><img src="assets/img/photos/wafer.jpg" alt="Wafer"><span class="cap">wafer silicio</span></div>
+          <div class="imgframe" style="width:32%; aspect-ratio:1;"><img src="assets/img/photos/chip.jpg" alt="Chip"><span class="cap">CPU/chip</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 · FILIERA CHIP -->
+  <section class="slide" data-note="La filiera del chip AI è globale e concentratissima: NVIDIA progetta negli USA (~80% del mercato chip AI), TSMC stampa a Taiwan, le macchine EUV sono solo di ASML (Olanda), la memoria HBM arriva dalla Corea. Un chip attraversa 3 continenti. Da qui le tensioni geopolitiche su Taiwan.">
+    <div class="bg-grid"></div>
+    <div class="kicker">Come è fatta · il chip</div>
+    <h2 class="big" style="margin:12px 0 22px;">Un chip AI attraversa 3 continenti</h2>
+    <div class="chain">
+      <div class="step"><div class="lg"><img data-init="NV" src="assets/img/logos/nvidia.png" alt="NVIDIA"></div><div class="role">Progetta</div><div class="where">🇺🇸 USA · NVIDIA</div><div class="what">~80% del mercato chip AI + software CUDA</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="lg"><img data-init="TS" src="assets/img/logos/tsmc.png" alt="TSMC"></div><div class="role">Stampa</div><div class="where">🇹🇼 Taiwan · TSMC</div><div class="what">~90% dei chip AI avanzati</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="lg"><img data-init="AS" src="assets/img/logos/asml.png" alt="ASML"></div><div class="role">Macchine EUV</div><div class="where">🇳🇱 Olanda · ASML</div><div class="what">l’unico produttore mondiale di litografia EUV</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="lg"><img data-init="SK" src="assets/img/logos/skhynix.png" alt="HBM"></div><div class="role">Memoria HBM</div><div class="where">🇰🇷 Corea · SK hynix / Samsung</div><div class="what">memoria ad alta banda saldata sul chip</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="lg"><img data-init="⚙" src="assets/img/logos/amd.png" alt="assemblaggio"></div><div class="role">Assemblaggio</div><div class="where">🇹🇼🇨🇳 Taiwan · Cina</div><div class="what">package del chip → datacenter</div></div>
+    </div>
+    <div class="row" style="margin-top:22px;">
+      <span class="tag r">Punto critico: Taiwan</span>
+      <span class="tag a">ASML: monopolio di fatto delle macchine EUV</span>
+      <span class="tag c">L’Europa controlla un anello solo — ma decisivo</span>
+    </div>
+  </section>
+
+  <!-- 17 · CAVI SOTTOMARINI (dati 2026) -->
+  <section class="slide" data-note="2026: 607 cavi attivi + 102 in programma (TeleGeography), oltre 1,5 mln km di fibra. Incidenti: Mar Rosso feb 2024; Baltico — 10 cavi tagliati dal 2022, 7-8 solo tra nov 2024 e gen 2025; Taiwan — 5 incidenti 2024-25, un blackout costerebbe ~$55M/giorno. Risposte: NATO Baltic Sentry e da giugno 2026 i primi Regional Cable Hub UE (Baltico e Mediterraneo).">
+    <div class="bg-grid"></div>
+    <div class="kicker">Come è fatta · la rete fisica · 2026</div>
+    <h2 class="big" style="margin:10px 0 6px;">Il 99% di internet passa sott’acqua</h2>
+    <div class="mapwrap" data-mode="cables" style="margin-top:6px;"></div>
+    <div class="row" style="margin-top:10px;">
+      <span class="tag c">607 cavi attivi + 102 in programma (TeleGeography 2026) · &gt;1,5 mln km</span>
+      <span class="tag r">Baltico: 10 cavi tagliati dal 2022</span>
+      <span class="tag r">Taiwan: 5 incidenti 2024-25 · blackout = ~$55M/giorno</span>
+      <span class="tag g">giu 2026: primi Regional Cable Hub UE (Baltico + Mediterraneo) · NATO Baltic Sentry</span>
+    </div>
+  </section>
+
+  <!-- 18 · ENERGIA (mappa consumi + mix) -->
+  <section class="slide" data-note="Consumi (IEA): datacenter globali ~485 TWh nel 2025 → ~950 TWh entro il 2030 (~3% dell'elettricità mondiale). Quote 2024: USA 45%, Cina 25%, Europa 15%. USA: 177-192 TWh nel 2024 (4-5% dell'elettricità USA) → 9-17% entro il 2030 (EPRI 2026). Mix USA dei DC: gas >40%, rinnovabili (solare+eolico) 24%, nucleare e carbone il resto. Una query AI ≈ 10-30 ricerche web.">
+    <div class="bg-grid"></div>
+    <div class="kicker">Come è fatta · energia & acqua · 2026</div>
+    <div class="split" style="margin-top:8px; grid-template-columns: 1fr 1.15fr;">
+      <div class="col">
+        <div class="imgframe" style="height:min(30vh,300px);"><img src="assets/img/photos/power.jpg" alt="Rete elettrica"><span class="cap">rete elettrica · domanda in crescita</span></div>
+        <div class="stat-num">485 → ~950 TWh</div>
+        <div class="stat-lbl">datacenter mondiali: 2025 → 2030 ≈ 3% dell’elettricità globale (IEA)</div>
+        <div class="stat-num a" style="margin-top:12px;">4–5% → 9–17%</div>
+        <div class="stat-lbl">dell’elettricità USA consumata dai datacenter: 2024 → 2030 (EPRI 2026)</div>
+        <div class="stat-num v" style="margin-top:12px;">10–30×</div>
+        <div class="stat-lbl">una domanda AI vs una ricerca Google · + milioni di litri d’acqua/giorno per raffreddare</div>
+      </div>
+      <div class="col">
+        <div class="mapwrap" data-mode="energy" style="max-height:38vh; overflow:hidden;"></div>
+        <div class="panel">
+          <div style="font-family:var(--font-d); font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Consumi datacenter per area (quota IEA 2024)</div>
+          <div class="ebar-row"><span class="lbl">🇺🇸 USA</span><span class="tr"><i style="width:45%;"></i></span><span class="val">45%</span></div>
+          <div class="ebar-row"><span class="lbl">🇨🇳 Cina</span><span class="tr"><i style="width:25%; background:linear-gradient(90deg,#fb7185,#fbbf24);"></i></span><span class="val">25%</span></div>
+          <div class="ebar-row"><span class="lbl">🇪🇺 Europa</span><span class="tr"><i style="width:15%; background:linear-gradient(90deg,#a78bfa,#22d3ee);"></i></span><span class="val">15%</span></div>
+          <div class="ebar-row"><span class="lbl">Resto mondo</span><span class="tr"><i style="width:15%; background:rgba(148,178,255,.4);"></i></span><span class="val">15%</span></div>
+          <div style="font-family:var(--font-d); font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--amber); margin:12px 0 2px;">Da dove arriva l’energia dei DC USA (IEA)</div>
+          <div class="mixbar">
+            <i style="width:42%; background:#fbbf24;" title="gas"></i>
+            <i style="width:24%; background:#34d399;" title="rinnovabili"></i>
+            <i style="width:14%; background:#a78bfa;" title="nucleare"></i>
+            <i style="width:20%; background:#fb7185;" title="carbone+altro"></i>
+          </div>
+          <div class="mixlegend">
+            <span><span class="dot" style="background:#fbbf24;"></span><b>&gt;40%</b> gas</span>
+            <span><span class="dot" style="background:#34d399;"></span><b>24%</b> rinnovabili (solare+eolico)</span>
+            <span><span class="dot" style="background:#a78bfa;"></span>nucleare</span>
+            <span><span class="dot" style="background:#fb7185;"></span>carbone e altro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 · FRAGILITÀ (con immagini) -->
+  <section class="slide" data-note="Punti deboli reali (2026): cavi sottomarini (Baltico, Taiwan, Mar Rosso), rete elettrica sotto pressione, incendi/alluvioni nei datacenter, cyberattack, deepfake, bias dei modelli, dipendenza da pochi fornitori, e le prime regole: AI Act UE.">
+    <div class="bg-grid"></div>
+    <div class="kicker">I punti fragili</div>
+    <h2 class="big" style="margin:12px 0 20px;">La fragilità del sistema</h2>
+    <div class="risks">
+      <div class="risk"><img src="assets/img/photos/cable.jpg" alt=""><div class="body"><div class="t">🌊 Cavi sottomarini</div><div class="d">Baltico: 10 cavi tagliati dal 2022. Taiwan: blackout = ~$55M/giorno.</div></div></div>
+      <div class="risk"><img src="assets/img/photos/power.jpg" alt=""><div class="body"><div class="t">🔌 Rete elettrica</div><div class="d">DC USA: 4–5% → 9–17% dell’elettricità entro 2030. Blackout = servizi giù.</div></div></div>
+      <div class="risk"><img src="assets/img/photos/flood.jpg" alt=""><div class="body"><div class="t">🔥 Incendi & alluvioni</div><div class="d">I datacenter si allagano o bruciano: serve ridondanza geografica.</div></div></div>
+      <div class="risk"><img src="assets/img/photos/hacker.jpg" alt=""><div class="body"><div class="t">🦠 Cyberattack</div><div class="d">Ransomware e data breach su cloud e dataset di training.</div></div></div>
+      <div class="risk"><img src="assets/img/photos/videocall.jpg" alt=""><div class="body"><div class="t">🎭 Deepfake</div><div class="d">Voci e video falsi in tempo reale: occhio critico + watermark (C2PA).</div></div></div>
+      <div class="risk"><img src="assets/img/photos/bias.jpg" alt=""><div class="body"><div class="t">⚖️ Bias & errori</div><div class="d">I modelli ereditano pregiudizi dai dati: testarli prima di usarli.</div></div></div>
+      <div class="risk"><img src="assets/img/photos/nvidia_gpu.jpg" alt=""><div class="body"><div class="t">🏭 Pochi fornitori</div><div class="d">Chip (NVIDIA ~80%, TSMC, ASML), cloud (AWS/Azure/GCP), pochi lab di modelli.</div></div></div>
+      <div class="risk"><img src="assets/img/photos/eu.jpg" alt=""><div class="body"><div class="t">🇪🇺 Regole: AI Act UE</div><div class="d">L’Europa è la prima a regolare l’AI ad alto rischio.</div></div></div>
+    </div>
+  </section>
+
+  <!-- 20 · COSA PUOI FARE TU (2026) -->
+  <section class="slide" data-note="A novembre 2026 gli strumenti di punta gratis/o in prova: ChatGPT (Astra), Claude (Fable 5.2), Gemini, Grok, Le Chat, DeepSeek, Perplexity, ElevenLabs v4, Suno v6, Veo 3.1 in Google Flow, Runway, Kling, Higgsfield, Nano Banana 2, Colab + Hugging Face + Copilot. Metodo: prova → smonta → ricostruisci.">
+    <div class="bg-grid"></div>
+    <div class="kicker">Oggi, gratis · nov 2026</div>
+    <h2 class="big" style="margin:12px 0 8px;">Cosa puoi fare tu, ora</h2>
+    <p class="sub" style="margin-bottom:18px;">Prova → smonta → ricostruisci. È così che si impara davvero.</p>
+    <div class="row" style="gap:14px;">
+      <div class="imgframe" style="width:150px; aspect-ratio:16/10;"><img src="assets/img/thumbs/veo31.jpg" alt=""><span class="cap">Veo 3.1 in Flow</span></div>
+      <div class="imgframe" style="width:150px; aspect-ratio:16/10;"><img src="assets/img/thumbs/kling4.jpg" alt=""><span class="cap">Kling 4.0</span></div>
+      <div class="imgframe" style="width:150px; aspect-ratio:16/10;"><img src="assets/img/thumbs/gen45.jpg" alt=""><span class="cap">Runway Gen-4.5</span></div>
+      <div class="imgframe" style="width:150px; aspect-ratio:16/10;"><img src="assets/img/thumbs/elevenv4.jpg" alt=""><span class="cap">ElevenLabs v4</span></div>
+      <div class="imgframe" style="width:150px; aspect-ratio:16/10;"><img src="assets/img/thumbs/sunov6.jpg" alt=""><span class="cap">Suno v6</span></div>
+      <div class="imgframe" style="width:150px; aspect-ratio:16/10;"><img src="assets/img/thumbs/astra.jpg" alt=""><span class="cap">GPT-6.2 Astra</span></div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+      <span class="tag c">Chat: ChatGPT (Astra) · Claude (Fable 5.2) · Gemini · Grok · Le Chat · DeepSeek</span>
+      <span class="tag">Ricerca: Perplexity</span>
+      <span class="tag v">Video: Flow/Veo 3.1 · Runway · Kling · Higgsfield</span>
+      <span class="tag a">Voce & musica: ElevenLabs v4 · Suno v6</span>
+      <span class="tag g">Codice: Colab · Hugging Face · Copilot · Claude Code</span>
+    </div>
+  </section>
+
+  <!-- 21 · CORSO ITS -->
+  <section class="slide" data-note="Il nostro corso: 2 anni, 1800 ore (950 in aula + 850 di stage in azienda), completamente gratuito (fondi UE e Ministero). Diploma di tecnico superiore EQF 5, spendibile in tutta Europa, PC portatile in dotazione, 100% in presenza a Roma. Programma: Data Science, Machine Learning, AI generativa & prompt engineering, automazione & RPA, Cloud & Business Intelligence, Cybersecurity, project work in azienda, inglese tecnico; 60% dei docenti vengono dalle aziende. Profilo: Tecnico superiore per la digitalizzazione dei processi con soluzioni AI.">
+    <div class="bg-grid"></div>
+    <div class="bg-glow" style="background:var(--cyan); top:-18vmax; right:-14vmax;"></div>
+    <div class="kicker">E noi? · ITS-ICT Academy · Roma</div>
+    <h2 class="big" style="margin:12px 0 18px;">AI &amp; Digital Innovation<br>Specialist</h2>
+    <div class="facts" style="margin-bottom:18px;">
+      <div class="fact"><div class="n">2 anni</div><div class="l">4 semestri · part-time</div></div>
+      <div class="fact"><div class="n">1800 h</div><div class="l">950 aula + 850 stage</div></div>
+      <div class="fact"><div class="n">€0</div><div class="l">100% gratuito (fondi UE)</div></div>
+      <div class="fact"><div class="n">EQF 5</div><div class="l">diploma UE · pre-laurea</div></div>
+      <div class="fact"><div class="n">PC</div><div class="l">portatile in dotazione</div></div>
+      <div class="fact"><div class="n">100%</div><div class="l">in presenza · a Roma</div></div>
+    </div>
+  </section>
+
+  <!-- 22 · ISCRIVITI -->
+  <section class="slide" data-note="Requisiti: diploma di maturità e 18 anni. Sede: Viale Cesare Pavese 305, Roma (Metro B EUR Fermi). Selezioni: candidatura dal sito + colloquio motivazionale. Open day e visite su prenotazione.">
+    <div class="bg-grid"></div>
+    <div class="kicker">Passo successivo</div>
+    <div class="split" style="margin-top:8px;">
+      <div class="col">
+        <h2 class="big">Vieni a conoscerci</h2>
+        <div class="row" style="margin-top:8px;">
+          <img class="qr" src="assets/img/qr-its.png" alt="QR its-ictacademy.com">
+          <div class="col" style="gap:8px;">
+            <span class="tag c">its-ictacademy.com</span>
+            <span class="tag">info@its-ictacademy.com</span>
+            <span class="tag">📞 06 6922 2106 · WhatsApp 329 717 6940</span>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="panel">
+          <div class="row" style="margin-bottom:10px;"><span class="tag a">Requisiti</span><span class="tag">diploma maturità + 18 anni</span></div>
+          <div class="row"><span class="tag v">Sede</span><span class="tag">Viale Cesare Pavese 305, 00144 Roma · Metro B “EUR Fermi”</span></div>
+        </div>
+        <div class="panel">
+          <div class="row"><span class="tag">selezione: candidatura + colloquio</span><span class="tag g">openday & visite su prenotazione</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 · DOMANDE -->
+  <section class="slide center" data-note="Grazie! Ricapitolando: l'AI crea video, voce, musica e ragiona (Astra, Fable); gira in ~12.000 datacenter, soprattutto negli USA; è fatta di chip che attraversano il mondo; poggia su cavi, energia e regole. E voi potete entrarci subito: provate gli strumenti gratis e venite al corso ITS gratuito a Roma.">
+    <div class="bg-grid"></div>
+    <div class="bg-glow" style="background:var(--violet); top:-20vmax; left:30vmax;"></div>
+    <div class="col center" style="position:relative; z-index:2;">
+      <h1 class="mega">DOMANDE?</h1>
+      <div class="row" style="justify-content:center; margin-top:24px;">
+        <span class="tag c">Astra · Fable</span><span class="tag c">video</span><span class="tag c">voce</span><span class="tag c">musica</span>
+        <span class="tag">chip</span><span class="tag">datacenter</span><span class="tag">cavi</span><span class="tag">energia</span>
+        <span class="tag v">il tuo percorso</span>
+      </div>
+      <p class="sub" style="text-align:center; margin-top:22px;">ITS-ICT Academy · Viale Cesare Pavese 305, Roma · its-ictacademy.com · corso gratuito “AI &amp; Digital Innovation Specialist”</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="clickzone prev" title="indietro"></div>
+<div class="clickzone next" title="avanti"></div>
+<div id="hud">
+  <span class="num">01 / 23</span>
+  <span class="bar"><i></i></span>
+  <span class="hint">← → naviga · F fullscreen · N note</span>
+</div>
+<div id="notes"></div>
+<div id="toast"></div>
+
+<script src="assets/data/world.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.querySelectorAll('img[data-init]').forEach(function (im) {
+    im.addEventListener('error', function () {
+      var s = document.createElement('span');
+      s.className = 'init';
+      s.textContent = im.getAttribute('data-init');
+      if (im.closest('.tool .lg')) { s.style.cssText = 'width:26px;height:26px;border-radius:8px;background:rgba(148,178,255,.16);display:flex;align-items:center;justify-content:center;font-family:Space Grotesk,sans-serif;font-weight:700;font-size:12px;color:#22d3ee;'; }
+      im.replaceWith(s);
+    });
+  });
+</script>
+</body>
+</html>
