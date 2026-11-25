@@ -245,7 +245,10 @@
 
     if (mode === 'hubs' || mode === 'cables') {
       const gh = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      HUBS.forEach(([lon, lat, gw, label]) => {
+      // labels with collision avoidance: bigger hubs first, skip overlapping labels
+      const sorted = [...HUBS].sort((a, b) => b[2] - a[2]);
+      const placedLabels = [];
+      sorted.forEach(([lon, lat, gw, label]) => {
         const p = proj(lon, lat);
         const r = 2.2 + Math.sqrt(gw) * 4.2;
         const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -257,11 +260,15 @@
         c.setAttribute('class', 'hub');
         gh.appendChild(c);
         if (gw >= 1.0 || label === 'N. Virginia') {
-          const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          t.setAttribute('x', p[0] + r * 0.6 + 3); t.setAttribute('y', p[1] - r * 0.5);
-          t.setAttribute('class', 'hub-label');
-          t.textContent = label + ' · ~' + gw + ' GW';
-          gh.appendChild(t);
+          const collides = placedLabels.some(q => Math.hypot(q[0] - p[0], q[1] - p[1]) < 64);
+          if (!collides) {
+            placedLabels.push(p);
+            const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            t.setAttribute('x', p[0] + r * 0.6 + 3); t.setAttribute('y', p[1] - r * 0.5);
+            t.setAttribute('class', 'hub-label');
+            t.textContent = label + ' · ~' + gw + ' GW';
+            gh.appendChild(t);
+          }
         }
       });
       svg.appendChild(gh);

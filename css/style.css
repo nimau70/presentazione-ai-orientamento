@@ -256,3 +256,32 @@ h2.big {
 .ag .d { color: var(--dim); font-size: clamp(12px, 1.2vw, 15px); line-height: 1.4; }
 
 .qr { width: clamp(120px, 14vw, 200px); height: auto; border-radius: 14px; border: 1px solid var(--line); background: #fff; padding: 8px; }
+
+/* --- slide 2: immagini agenda --- */
+.ag { overflow: hidden; }
+.ag .agimg { width: 100%; height: clamp(90px, 13vh, 150px); object-fit: cover; border-radius: 12px; margin-bottom: 10px; display: block; }
+
+/* --- slide 13: matrice con testo più grande, senza sovrapposizioni --- */
+.matrix .tool { padding: 10px 12px; gap: 14px; }
+.matrix .tool .tn { font-size: clamp(15px, 1.55vw, 21px); }
+.matrix .tool .tk { font-size: clamp(12px, 1.2vw, 15px); }
+.matrix .tool .lg { width: 34px; height: 34px; flex: 0 0 34px; }
+.matrix .tool .lg img { width: 30px; height: 30px; }
+.matrix .mcol h3 { font-size: clamp(20px, 2.2vw, 30px); margin-bottom: 14px; }
+
+/* --- slide 20: rischi in 4x2 bilanciato --- */
+.risks { grid-template-columns: repeat(4, 1fr); }
+.risks .risk img { height: 112px; }
+@media (max-width: 1100px) { .risks { grid-template-columns: repeat(2, 1fr); } }
+
+/* --- slide 21: miniature video più grandi, centrate --- */
+.thumbrow { justify-content: center; gap: 16px; flex-wrap: wrap; }
+.thumbrow .imgframe { width: clamp(170px, 19vw, 240px); }
+
+/* --- slide 16: immagini datacenter più grandi --- */
+.dcrow { display: flex; gap: 10px; margin-top: 6px; }
+.dcrow .imgframe { flex: 1; width: auto; aspect-ratio: auto; height: clamp(150px, 24vh, 230px); }
+
+/* --- slides 22-23: immagini dal sito ITS --- */
+.itsrow { display: flex; gap: 14px; margin-top: 16px; }
+.itsrow .imgframe { flex: 1; height: clamp(130px, 19vh, 200px); }
