@@ -8,7 +8,7 @@ Deck per ragazzi delle superiori, pensato per la giornata di orientamento dell'*
 - **Frecce ← →** (o click ai lati, PgAv/PgInd) per navigare · **F** fullscreen · **N** mostra/nasconde le **note del relatore** · **Home/End** inizio/fine.
 - Slide 2: i riquadri dell'indice sono **cliccabili** e saltano alla sezione relativa.
 - Slide 13 (Chi c'è dietro): **quiz** — mostra solo le facce, poi **click** sulla slide per rivelare nomi e aziende.
-- I video partono automaticamente da 0:00 con audio e fanno loop dall’inizio (YouTube ignora `start` al loop, quindi non lo usiamo). Per tagliare la clip: `data-end` (secondi) nel `.yt` della slide.
+- I video partono automaticamente da 0:00 con audio, scorrono fino alla fine e poi ripartono dall’inizio (loop nativo YouTube: niente parametri start/end, che vengono ignorati al loop).
 
 ## Struttura (23 slide)
 

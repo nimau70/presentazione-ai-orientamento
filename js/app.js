@@ -45,12 +45,10 @@
       if (!id || el.querySelector('iframe')) return;
       const th = el.querySelector('.thumb');
       if (th) th.style.display = 'none';
-      const en = el.getAttribute('data-end');
-      // no 'start' param: YouTube ignores it on loop, causing replay from 0 instead of the clip start.
-      // Videos always begin at 0:00 and loop from the beginning; 'end' caps the clip length.
-      let src = 'https://www.youtube.com/embed/' + id +
+      // no 'start'/'end' params: YouTube ignores them on loop, causing restarts mid-video.
+      // Videos always play from 0:00 to the real end, then loop from the beginning.
+      const src = 'https://www.youtube.com/embed/' + id +
         '?autoplay=1&loop=1&playlist=' + id + '&rel=0&playsinline=1&modestbranding=1';
-      if (en) src += '&end=' + en;
       const iframe = document.createElement('iframe');
       iframe.src = src;
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
